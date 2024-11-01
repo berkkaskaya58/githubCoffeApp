@@ -5,6 +5,7 @@ import 'package:coffee_shop_app/view/order_page_view/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:coffee_shop_app/widget/button_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_size/index.dart';
+import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -143,14 +144,12 @@ class DetailPage extends StatelessWidget {
               SizedBox(
                 height: paddingHeight / 20,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ContainerSize(
-                    text: 'S',
-                  ),
-                  ContainerSize(text: 'M'),
-                  ContainerSize(text: 'L')
+                 ContainerText(text: 'S', function: (){},),
+                  ContainerText(text: 'M', function: (){},),
+                   ContainerText(text: 'L', function: (){},),
                 ],
               ),
              const Spacer(),

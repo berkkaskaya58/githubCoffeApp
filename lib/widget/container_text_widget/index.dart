@@ -10,10 +10,14 @@ class ContainerText extends StatefulWidget {
   final double? width;
   final double? height;
   final BorderRadiusGeometry? borderRadius;
+  final Icon? prefixIcon;
+  final Color? borderColor;
 
-   ContainerText({
+  ContainerText({
     Key? key,
     this.backgroundColor,
+    this.borderColor,
+    this.prefixIcon,
     this.textColor = UIColor.black,
     required this.text,
     required this.function,
@@ -34,11 +38,14 @@ class _ContainerTextState extends State<ContainerText> {
     double containerHeight = widget.height ?? 50; // Varsayılan yükseklik
 
     return ClipRRect(
-      borderRadius: widget.borderRadius ?? BorderRadius.circular(10), // Varsayılan border radius
+      borderRadius: widget.borderRadius ?? BorderRadius.circular(15), // Varsayılan border radius
       child: Container(
-        // width: containerWidth,
-        // height: containerHeight,
-        color: widget.backgroundColor ?? UIColor.white, // Arka plan rengi
+        width: containerWidth,
+        height: containerHeight,
+        decoration: BoxDecoration(
+          color: widget.backgroundColor ?? UIColor.white, // Arka plan rengi
+          border: Border.all(color: widget.borderColor ?? UIColor.white), // Çerçeve rengi
+        ),
         child: GestureDetector(
           onTap: () {
             widget.function(); // Tıklama işlevi
@@ -53,10 +60,20 @@ class _ContainerTextState extends State<ContainerText> {
               }
             });
           },
-          child: BasicText(
-            textAlign: TextAlign.center,
-            text: widget.text,
-            textColor: widget.textColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center, // Ortalanmış dizilim
+            children: [
+              if (widget.prefixIcon != null) // Eğer prefixIcon verilmişse
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0), // İkon ile metin arasında boşluk
+                  child: widget.prefixIcon,
+                ),
+              BasicText(
+                textAlign: TextAlign.center,
+                text: widget.text,
+                textColor: widget.textColor,
+              ),
+            ],
           ),
         ),
       ),

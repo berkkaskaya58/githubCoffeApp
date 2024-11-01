@@ -48,15 +48,13 @@ class OrderPage extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: Container(
-                  
                   color: UIColor.grey,
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    
                     children: [
-                      ContainerText(width: paddingHeight,
-                        
+                      ContainerText(
+                        width: paddingHeight,
                         text: 'Deliver',
                         function: () {},
                       ),
@@ -70,18 +68,34 @@ class OrderPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
+              const Row(
                 children: [
                   BasicText(text: 'Sipariş Adresi'),
                 ],
-                
-              ), Row(
+              ),
+              const Row(
                 children: [
                   BasicText(text: 'Elazığ Merkez'),
                 ],
-                
               ),
-              Row(children: [ContainerText(text:'Adresi Düzenle', function: (){}),ContainerText(text:'Not Ekle', function: (){})],)
+              Row(
+                children: [
+                  ContainerText(
+                    borderRadius: BorderRadius.circular(20),
+                    borderColor: UIColor.grey,
+                    width: paddingWidth * 7,
+                    text: 'Adresi Düzenle',
+                    function: () {},
+                    prefixIcon: Icon(Icons.edit),
+                  ),
+                  ContainerText(
+                    borderColor: UIColor.grey,
+                    text: 'Not Ekle',
+                    function: () {},
+                    prefixIcon: Icon(Icons.add),
+                  )
+                ],
+              )
             ],
           ),
         ),
