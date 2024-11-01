@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  _buildCoffeeTypeButton('All Coffee', showAllCoffees),
+                  _buildCoffeeTypeButton('Al Coffee', showAllCoffees),
                   _buildCoffeeTypeButton('Macchiato', () => _updateCoffeeList(['Caramel Macchiato'])),
                   _buildCoffeeTypeButton('Latte', () => _updateCoffeeList(['Latte'])),
                   _buildCoffeeTypeButton('Americano', () => _updateCoffeeList(['Americano'])),
