@@ -3,8 +3,6 @@ import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
 class ContainerText extends StatefulWidget {
-  Color? backgroundColor;
-  Color? textColor;
   final String text;
   final Function function;
   final double? width;
@@ -15,12 +13,10 @@ class ContainerText extends StatefulWidget {
 
   ContainerText({
     Key? key,
-    this.backgroundColor,
-    this.borderColor,
-    this.prefixIcon,
-    this.textColor = UIColor.black,
     required this.text,
     required this.function,
+    this.prefixIcon,
+    this.borderColor,
     this.width,
     this.height,
     this.borderRadius,
@@ -31,47 +27,50 @@ class ContainerText extends StatefulWidget {
 }
 
 class _ContainerTextState extends State<ContainerText> {
+  late Color _backgroundColor;
+  late Color _textColor;
+  bool _isClicked = false; // Yerel durum
+
+  @override
+  void initState() {
+    super.initState();
+    // Başlangıçta background ve text renklerini onClick durumuna göre ayarlıyoruz
+    _backgroundColor = _isClicked ? UIColor.loginButtonColor : UIColor.white;
+    _textColor = _isClicked ? UIColor.white : UIColor.black;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Varsayılan genişlik ve yükseklik değerleri
-    double containerWidth = widget.width ?? MediaQuery.of(context).size.width * 0.25; // %25 genişlik
-    double containerHeight = widget.height ?? 50; // Varsayılan yükseklik
+    double containerWidth = widget.width ?? MediaQuery.of(context).size.width * 0.25;
+    double containerHeight = widget.height ?? 50;
 
     return ClipRRect(
-      borderRadius: widget.borderRadius ?? BorderRadius.circular(15), // Varsayılan border radius
+      borderRadius: widget.borderRadius ?? BorderRadius.circular(15),
       child: Container(
         width: containerWidth,
         height: containerHeight,
-        decoration: BoxDecoration(
-          color: widget.backgroundColor ?? UIColor.white, // Arka plan rengi
-          border: Border.all(color: widget.borderColor ?? UIColor.white), // Çerçeve rengi
-        ),
+        color: _backgroundColor, // Arka plan rengini ayarlıyoruz
         child: GestureDetector(
           onTap: () {
-            widget.function(); // Tıklama işlevi
+            widget.function(); // Tıklama fonksiyonu
             setState(() {
-              // Arka plan ve metin rengini değiştir
-              if (widget.backgroundColor == UIColor.loginButtonColor) {
-                widget.backgroundColor = UIColor.white;
-                widget.textColor = UIColor.black;
-              } else {
-                widget.backgroundColor = UIColor.loginButtonColor;
-                widget.textColor = UIColor.white;
-              }
+              _isClicked = !_isClicked; // Durumu tersine çeviriyoruz
+              _backgroundColor = _isClicked ? UIColor.loginButtonColor : UIColor.white;
+              _textColor = _isClicked ? UIColor.white : UIColor.black;
             });
           },
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center, // Ortalanmış dizilim
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (widget.prefixIcon != null) // Eğer prefixIcon verilmişse
+              if (widget.prefixIcon != null)
                 Padding(
-                  padding: const EdgeInsets.only(right: 8.0), // İkon ile metin arasında boşluk
+                  padding: const EdgeInsets.only(right: 8.0),
                   child: widget.prefixIcon,
                 ),
               BasicText(
                 textAlign: TextAlign.center,
                 text: widget.text,
-                textColor: widget.textColor,
+                textColor: _textColor, // Metin rengini ayarlıyoruz
               ),
             ],
           ),

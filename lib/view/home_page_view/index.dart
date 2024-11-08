@@ -136,8 +136,8 @@ class _HomePageState extends State<HomePage> {
       padding: EdgeInsets.only(right: 10.0), // Spacing between buttons
       child: ContainerText(
         text: text,
-        backgroundColor: UIColor.white,
-        textColor: UIColor.black,
+        // backgroundColor: UIColor.white,
+        // textColor: UIColor.black,
         function: function,
       ),
     );

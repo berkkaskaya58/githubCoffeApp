@@ -45,29 +45,36 @@ class OrderPage extends StatelessWidget {
                   ),
                 ],
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Container(
-                  color: UIColor.grey,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ContainerText(
-                        width: paddingHeight,
-                        text: 'Deliver',
-                        function: () {},
-                      ),
-                      ContainerText(
-                        width: paddingWidth,
-                        backgroundColor: UIColor.grey,
-                        text: 'Pick Up',
-                        function: () {},
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              
+//              Container(
+//   decoration: BoxDecoration(
+//     borderRadius: BorderRadius.circular(5),
+   
+//   ),
+//   child: ClipRRect(
+//     borderRadius: BorderRadius.circular(5),
+//     child: Row(
+//       children: [
+//         Expanded(
+//           child: ContainerText(
+//             width: double.infinity,
+//             text: 'Deliver',
+//             function: () {},
+//           ),
+//         ),
+//         Expanded(
+//           child: ContainerText(
+//             width: double.infinity,
+//             text: 'Pick Up',
+//             function: () {},
+//           ),
+//         ),
+//       ],
+//     ),
+//   ),
+// ),
+
+
               const Row(
                 children: [
                   BasicText(text: 'Sipariş Adresi'),

@@ -1,10 +1,10 @@
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/ui/ui_description/index.dart';
 import 'package:coffee_shop_app/ui/ui_image/index.dart';
+import 'package:coffee_shop_app/view/navigation_bar_detail_page/index.dart';
 import 'package:coffee_shop_app/view/order_page_view/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:coffee_shop_app/widget/button_widget/index.dart';
-import 'package:coffee_shop_app/widget/container_size/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -177,7 +177,7 @@ class DetailPage extends StatelessWidget {
                   Expanded(
                     // Bu Expanded eklendi
                     child: CustomButton(
-                      function: ()=>Get.to(()=> const OrderPage()),
+                      function: ()=>Get.to(()=> CustomNavigationBar()),
                       height: paddingHeight / 4,
                       width: paddingWidth * 12,
                       text: 'Buy Now',
