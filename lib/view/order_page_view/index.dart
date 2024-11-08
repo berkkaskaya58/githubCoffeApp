@@ -1,7 +1,7 @@
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/ui/ui_image/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
-import 'package:coffee_shop_app/widget/container_coffee_widget/index.dart';
+import 'package:coffee_shop_app/widget/container_coffe_order_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
@@ -94,7 +94,7 @@ class OrderPage extends StatelessWidget {
 
               // Kahve içeriği gösterimi için GridView
               Expanded(
-                child:ContainerCoffee(
+                child:ContainerCoffeeOrder(
                       title: text ?? 'Ürün Adı',
                       subTitle: 'Açıklama', // Alt başlık için örnek bir metin
                       price: price ?? '0.00',

@@ -1,6 +1,7 @@
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/view/login_page_view/index.dart';
 import 'package:coffee_shop_app/view/order_page_view/index.dart';
+import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatefulWidget {
@@ -35,7 +36,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             child: Container(
               decoration: BoxDecoration(
                 color: UIColor.loginButtonColor,
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Row(
@@ -50,18 +51,16 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          Icons.local_shipping,
-                          color:
-                              currentIndex == 0 ? UIColor.white : Colors.black,
-                        ),
-                        Text(
-                          'Deliver',
-                          style: TextStyle(
-                            color: currentIndex == 0
+                       
+                        BasicText(
+                          text:'Deliver',
+                          
+                            textColor: currentIndex == 0
                                 ? UIColor.white
                                 : Colors.black,
-                          ),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                          
                         ),
                       ],
                     ),
@@ -75,18 +74,16 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
-                          Icons.store,
-                          color:
-                              currentIndex == 1 ? UIColor.white : Colors.black,
-                        ),
-                        Text(
-                          'Pick Up',
-                          style: TextStyle(
-                            color: currentIndex == 1
+                       
+                         BasicText(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          text:'Pick Up',
+                          
+                            textColor: currentIndex ==1
                                 ? UIColor.white
                                 : Colors.black,
-                          ),
+                          
                         ),
                       ],
                     ),
