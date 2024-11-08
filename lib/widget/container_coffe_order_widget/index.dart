@@ -1,3 +1,4 @@
+import 'package:coffee_shop_app/ui/ui_image/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
@@ -25,34 +26,54 @@ class _ContainerCoffeeOrderState extends State<ContainerCoffeeOrder> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.05;
+    double height = MediaQuery.of(context).size.width * 0.15;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GestureDetector(
         onTap: () {
-         
-         widget.function();
+          widget.function();
         },
         child: Container(
+          width: double.infinity,
+          height: height,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: SizedBox(
-                  child: Image.asset(
-                    width: width * 8,
-                    widget.image,
-                    fit: BoxFit.fill,
-                  ),
+                child: Image.asset(
+                  UIImage.coffee2,
+                  width: width * 5,
+                  height: height, // Görsel yüksekliği
+                  fit: BoxFit.cover,
                 ),
               ),
-              Column(children: [BasicText(text: widget.title),BasicText(text: widget.subTitle),],),
-              SizedBox(width: width,),
-              Icon(Icons.remove),
-              BasicText(text: '1'),
-              Icon(Icons.add)
-            
+              SizedBox(width: width / 2),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BasicText(text: widget.title),
+                    BasicText(text: widget.subTitle),
+                  ],
+                ),
+              ),
+             
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                 
+                  children: [
+                    const Icon(Icons.remove),
+                    SizedBox(width: width / 2),
+                    BasicText(text: '1'),
+                    SizedBox(width: width / 2),
+                    const Icon(Icons.add),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

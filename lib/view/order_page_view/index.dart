@@ -1,6 +1,8 @@
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/ui/ui_image/index.dart';
+import 'package:coffee_shop_app/view/home_page_view/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
+import 'package:coffee_shop_app/widget/button_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_coffe_order_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +30,7 @@ class OrderPage extends StatelessWidget {
       backgroundColor: UIColor.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(
-           left: width,
-           right: width,
-           top: height/8
-          ),
+          padding: EdgeInsets.only(left: width, right: width, top: height / 8),
           child: Column(
             children: [
               // Üst navigasyon çubuğu
@@ -58,7 +56,9 @@ class OrderPage extends StatelessWidget {
                   ),
                 ],
               ),
-  SizedBox(height: height/1.5,),
+              SizedBox(
+                height: height / 1.5,
+              ),
               // Başlık ve adres bilgileri
               const Row(
                 children: [
@@ -94,14 +94,15 @@ class OrderPage extends StatelessWidget {
 
               // Kahve içeriği gösterimi için GridView
               Expanded(
-                child:ContainerCoffeeOrder(
-                      title: text ?? 'Ürün Adı',
-                      subTitle: 'Açıklama', // Alt başlık için örnek bir metin
-                      price: price ?? '0.00',
-                      image: imagePath ?? UIImage.notFound,
-                      function: () {}, // Buton işlevi
-                    ),
+                child: ContainerCoffeeOrder(
+                  title: text ?? 'Ürün Adı',
+                  subTitle: 'Açıklama', // Alt başlık için örnek bir metin
+                  price: price ?? '0.00',
+                  image: imagePath ?? UIImage.notFound,
+                  function: () {}, // Buton işlevi
+                ),
               ),
+              CustomButton(text: 'buton', function: () {})
             ],
           ),
         ),
