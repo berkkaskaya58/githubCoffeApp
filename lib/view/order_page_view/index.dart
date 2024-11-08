@@ -102,7 +102,8 @@ class OrderPage extends StatelessWidget {
                     prefixIcon: Icon(Icons.add),
                   )
                 ],
-              )
+              ),
+              
             ],
           ),
         ),
