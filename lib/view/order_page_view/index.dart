@@ -1,37 +1,50 @@
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/ui/ui_image/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
+import 'package:coffee_shop_app/widget/container_coffee_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
 class OrderPage extends StatelessWidget {
-  const OrderPage({super.key});
+  final String? imagePath;
+  final String? text;
+  final String? price;
+  final int? index;
+
+  const OrderPage({
+    super.key,
+    this.imagePath,
+    this.text,
+    this.price,
+    this.index,
+  });
 
   @override
   Widget build(BuildContext context) {
-    double paddingWidth = MediaQuery.of(context).size.width * 0.05;
-    double paddingHeight = MediaQuery.of(context).size.width * 0.55;
+    double width = MediaQuery.of(context).size.width * 0.05;
+    double height = MediaQuery.of(context).size.width * 0.55;
 
     return Scaffold(
       backgroundColor: UIColor.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-              left: paddingWidth,
-              right: paddingWidth,
-              bottom: paddingHeight / 10),
+           left: width,
+           right: width,
+           top: height/8
+          ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Üst navigasyon çubuğu
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: paddingWidth * 1.5,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: SizedBox(
+                      width: width * 1.5,
                       child: Image.asset(UIImage.arrowLeft),
                     ),
                   ),
@@ -45,36 +58,8 @@ class OrderPage extends StatelessWidget {
                   ),
                 ],
               ),
-              
-//              Container(
-//   decoration: BoxDecoration(
-//     borderRadius: BorderRadius.circular(5),
-   
-//   ),
-//   child: ClipRRect(
-//     borderRadius: BorderRadius.circular(5),
-//     child: Row(
-//       children: [
-//         Expanded(
-//           child: ContainerText(
-//             width: double.infinity,
-//             text: 'Deliver',
-//             function: () {},
-//           ),
-//         ),
-//         Expanded(
-//           child: ContainerText(
-//             width: double.infinity,
-//             text: 'Pick Up',
-//             function: () {},
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// ),
-
-
+  SizedBox(height: height/1.5,),
+              // Başlık ve adres bilgileri
               const Row(
                 children: [
                   BasicText(text: 'Sipariş Adresi'),
@@ -85,25 +70,38 @@ class OrderPage extends StatelessWidget {
                   BasicText(text: 'Elazığ Merkez'),
                 ],
               ),
+
+              // Adres ve Not ekle butonları
               Row(
                 children: [
                   ContainerText(
                     borderRadius: BorderRadius.circular(20),
                     borderColor: UIColor.grey,
-                    width: paddingWidth * 7,
+                    width: width * 7,
                     text: 'Adresi Düzenle',
                     function: () {},
-                    prefixIcon: Icon(Icons.edit),
+                    prefixIcon: const Icon(Icons.edit),
                   ),
                   ContainerText(
                     borderColor: UIColor.grey,
                     text: 'Not Ekle',
                     function: () {},
-                    prefixIcon: Icon(Icons.add),
-                  )
+                    prefixIcon: const Icon(Icons.add),
+                  ),
                 ],
               ),
-              
+              const Divider(),
+
+              // Kahve içeriği gösterimi için GridView
+              Expanded(
+                child:ContainerCoffee(
+                      title: text ?? 'Ürün Adı',
+                      subTitle: 'Açıklama', // Alt başlık için örnek bir metin
+                      price: price ?? '0.00',
+                      image: imagePath ?? UIImage.notFound,
+                      function: () {}, // Buton işlevi
+                    ),
+              ),
             ],
           ),
         ),

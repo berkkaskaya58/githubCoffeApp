@@ -14,7 +14,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   int currentIndex = 0;
 
   final List<Widget> pages = [
-    const OrderPage(),
+     OrderPage(),
     const LoginPage(),
   ];
 
@@ -29,7 +29,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
           // Yukarıdaki gezinme çubuğu
           Positioned(
-            top: height,
+            top: height/1.5,
             left: width,
             right: width,
             child: Container(

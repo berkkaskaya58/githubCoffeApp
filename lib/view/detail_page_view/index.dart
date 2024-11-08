@@ -2,7 +2,6 @@ import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/ui/ui_description/index.dart';
 import 'package:coffee_shop_app/ui/ui_image/index.dart';
 import 'package:coffee_shop_app/view/navigation_bar_detail_page/index.dart';
-import 'package:coffee_shop_app/view/order_page_view/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:coffee_shop_app/widget/button_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
@@ -31,7 +30,7 @@ class DetailPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-               left: paddingWidth, right: paddingWidth,bottom: paddingHeight/10),
+               left: paddingWidth, right: paddingWidth,bottom: paddingHeight/6),
           child: Column(
             children: [
               Row(
@@ -130,7 +129,7 @@ class DetailPage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: paddingHeight / 20,
+                height: paddingHeight / 5,
               ),
               const Row(
                 children: [
@@ -142,7 +141,7 @@ class DetailPage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: paddingHeight / 20,
+                height: paddingHeight / 8,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
