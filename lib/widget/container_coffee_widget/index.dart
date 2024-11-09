@@ -24,17 +24,19 @@ class ContainerCoffee extends StatefulWidget {
 }
 
 class _ContainerCoffeeState extends State<ContainerCoffee> {
-  int amount=0;
+  int amount = 0;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.05;
+    double imageWidth = MediaQuery.of(context).size.width * 0.35;  // Resmin genişliğini dinamik hale getirdik
+    double imageHeight = MediaQuery.of(context).size.height * 0.2; // Resmin yüksekliğini de dinamik yaptık
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GestureDetector(
         onTap: () {
-         
-         widget.function();
+          widget.function();
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,44 +44,49 @@ class _ContainerCoffeeState extends State<ContainerCoffee> {
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: SizedBox(
+                width: imageWidth*2,  // Resmin genişliğini dinamik yapıyoruz
+                height: imageHeight,  // Resmin yüksekliğini dinamik yapıyoruz
                 child: Image.asset(
-                  width: width * 8,
                   widget.image,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,  // Resmin orantılı şekilde yerleşmesini sağlıyoruz
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                BasicText(text: widget.title),
-                BasicText(text: widget.subTitle, textColor: UIColor.grey),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 10),
+                  BasicText(text: widget.title),
+                  BasicText(text: widget.subTitle, textColor: UIColor.grey),
+                ],
+              ),
             ),
-            Row(
-              children: [
-                BasicText(text: '${widget.price}'),
-                SizedBox(width: width * 4.5),
-                GestureDetector(
-                  onTap: () => setState(() {
-                    amount++;
-                    Get.snackbar('BAŞARILI','Ürün Sepete Eklendi',snackPosition: SnackPosition.TOP);
-
-                  }),
-
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(9),
-                    child: Container(
-                      color: UIColor.loginButtonColor,
-                      child: const Icon(
-                        Icons.add,
-                        color: UIColor.white,
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Row(
+                children: [
+                  BasicText(text: '${widget.price}'),
+                  SizedBox(width: width * 4.5),
+                  GestureDetector(
+                    onTap: () => setState(() {
+                      amount++;
+                      Get.snackbar('BAŞARILI', 'Ürün Sepete Eklendi', snackPosition: SnackPosition.TOP);
+                    }),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(9),
+                      child: Container(
+                        color: UIColor.loginButtonColor,
+                        child: const Icon(
+                          Icons.add,
+                          color: UIColor.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),

@@ -51,8 +51,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double paddingWidth = MediaQuery.of(context).size.width * 0.05;
-    double paddingHeight = MediaQuery.of(context).size.width * 0.05;
+    double width = MediaQuery.of(context).size.width * 0.05;
+    double height = MediaQuery.of(context).size.height * 0.05;
 
     return Scaffold(
       body: Stack(
@@ -66,9 +66,9 @@ class _HomePageState extends State<HomePage> {
           ),
           // Search TextField
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.15, // Yüksekliği daha esnek hale getirin
-            left: paddingWidth,
-            right: paddingWidth,
+            top: MediaQuery.of(context).size.height * 0.17, // Yüksekliği daha esnek hale getirin
+            left: width,
+            right: width,
             child: TextField(
               controller: controller,
               onChanged: filterSearchResults,
@@ -80,9 +80,9 @@ class _HomePageState extends State<HomePage> {
           ),
           // Coffee Shop Image
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.25, // Dinamik yükseklik
-            left: paddingWidth,
-            right: paddingWidth,
+            top: MediaQuery.of(context).size.height * 0.28, // Dinamik yükseklik
+            left: width,
+            right: width,
             child: Image.asset(
               UIImage.onFree,
               fit: BoxFit.cover,
@@ -90,9 +90,9 @@ class _HomePageState extends State<HomePage> {
           ),
           // Coffee Type Filter Buttons
           Positioned(
-            top: paddingHeight*20, // Dinamik yükseklik
-            left: paddingWidth,
-            right: paddingWidth,
+            top: height*9.3, // Dinamik yükseklik
+            left: width,
+            right: width,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -107,24 +107,25 @@ class _HomePageState extends State<HomePage> {
           ),
           // Coffee Grid View
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.55, // Dinamik yükseklik
-            left: paddingWidth,
-            right: paddingWidth,
+            top: MediaQuery.of(context).size.height * 0.53, // Dinamik yükseklik
+            left: width,
+            right: width,
             child: SizedBox(
-              height: 300,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  mainAxisExtent: 260,
-                ),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  return _buildCoffeeItem(index);
-                },
-              ),
-            ),
+  height: 400,
+  child: GridView.builder(
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      mainAxisSpacing: 0,  // Daha küçük boşluk (yükseklik boşluğu)
+      crossAxisSpacing: width,  // Daha küçük boşluk (genişlik boşluğu)
+      mainAxisExtent: 360, // Öğelerin yüksekliğini biraz daha düşük tutuyoruz
+    ),
+    itemCount: items.length,
+    itemBuilder: (context, index) {
+      return _buildCoffeeItem(index);
+    },
+  ),
+),
+
           ),
         ],
       ),

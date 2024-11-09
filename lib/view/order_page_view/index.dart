@@ -96,7 +96,7 @@ class _OrderPageState extends State<OrderPage> {
                   ContainerText(
                     borderRadius: BorderRadius.circular(20),
                     borderColor: UIColor.grey,
-                    width: width * 7,
+                    width: width*8,
                     text: 'Adresi Düzenle',
                     function: () {},
                     prefixIcon: const Icon(Icons.edit),
@@ -115,7 +115,7 @@ class _OrderPageState extends State<OrderPage> {
                         title: widget.text ?? 'Ürün Adı',
                         subTitle: 'Açıklama',
                         price: widget.price,
-                        image: widget.imagePath ?? UIImage.notFound,
+                        image: widget.imagePath ,
                         function: () {
                           setState(() {
                             // Fiyat güncellenmeden önce yapılacak diğer işlemler

@@ -46,7 +46,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
           // Gezinme çubuğu
           Positioned(
-            bottom: height*2.8,
+            bottom: height*3,
             left: width,
             right: width,
             child: Container(
