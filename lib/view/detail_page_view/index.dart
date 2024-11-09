@@ -14,12 +14,13 @@ class DetailPage extends StatefulWidget {
   final String text;
   final double price; // initialPrice yerine price kullanıldı
   final int index;
+  
   const DetailPage(
       {super.key,
       required this.imagePath,
       required this.text,
       required this.price, // price olarak değiştirildi
-      required this.index});
+      required this.index, });
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -78,12 +79,12 @@ class _DetailPageState extends State<DetailPage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                       isLiked=!isLiked;  // Heart iconunun durumunu değiştiriyoruz
+                       isLiked=!isLiked;  
                       });
                     },
                     child: isLiked 
-                      ? const Icon(EvaIcons.heart, color: Colors.red) // Dolu kalp
-                      : const Icon(EvaIcons.heartOutline, color: Colors.grey), // Çizili kalp
+                      ? const Icon(EvaIcons.heart, color: Colors.red) 
+                      : const Icon(EvaIcons.heartOutline, color: Colors.grey),
                   ),
                 ],
               ),

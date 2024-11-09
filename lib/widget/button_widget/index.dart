@@ -38,7 +38,7 @@ class _CustomButtonState extends State<CustomButton> {
           height: widget.height,
           child: GestureDetector(
             onTap: () {
-              widget.function!();
+              widget.function();
             },
             child: Container(
               color: widget.backgroundColor ?? UIColor.grey,

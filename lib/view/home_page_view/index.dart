@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
           ),
           // Coffee Type Filter Buttons
           Positioned(
-            top: height*9.3, // Dinamik yükseklik
+            top: height*9.5, // Dinamik yükseklik
             left: width,
             right: width,
             child: SingleChildScrollView(

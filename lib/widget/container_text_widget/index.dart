@@ -11,8 +11,8 @@ class ContainerText extends StatefulWidget {
   final Icon? prefixIcon;
   final Color? borderColor;
 
-  ContainerText({
-    Key? key,
+  const ContainerText({
+    super.key,
     required this.text,
     required this.function,
     this.prefixIcon,
@@ -20,13 +20,14 @@ class ContainerText extends StatefulWidget {
     this.width,
     this.height,
     this.borderRadius,
-  }) : super(key: key);
+  });
 
   @override
   State<ContainerText> createState() => _ContainerTextState();
 }
 
 class _ContainerTextState extends State<ContainerText> {
+  bool isSelected=false;
   late Color _backgroundColor;
   late Color _textColor;
   bool _isClicked = false; // Yerel durum

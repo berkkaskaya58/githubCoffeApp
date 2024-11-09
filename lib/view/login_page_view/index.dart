@@ -10,7 +10,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     double width = MediaQuery.of(context).size.width * 0.05;
+    //  double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.width * 0.05;
     
 
@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
         ),
         child:Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(children: [Spacer(), CustomButton(
+          child: Column(children: [const Spacer(), CustomButton(
             width: double.infinity,
             height: height*2.5,
             backgroundColor: UIColor.loginButtonColor,

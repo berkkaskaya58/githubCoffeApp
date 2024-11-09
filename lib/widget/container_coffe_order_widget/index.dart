@@ -63,7 +63,7 @@ class _ContainerCoffeeOrderState extends State<ContainerCoffeeOrder> {
         onTap: () {
           widget.function();
         },
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
