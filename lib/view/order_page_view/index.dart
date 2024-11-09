@@ -7,7 +7,7 @@ import 'package:coffee_shop_app/widget/container_coffe_order_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
-class OrderPage extends StatelessWidget {
+class OrderPage extends StatefulWidget {
   final String? imagePath;
   final String? text;
   final String? price;
@@ -22,6 +22,11 @@ class OrderPage extends StatelessWidget {
   });
 
   @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.width * 0.55;
@@ -30,7 +35,8 @@ class OrderPage extends StatelessWidget {
       backgroundColor: UIColor.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(left: width, right: width, top: height / 8),
+          padding:
+              EdgeInsets.symmetric(vertical: height / 8, horizontal: width),
           child: Column(
             children: [
               // Üst navigasyon çubuğu
@@ -91,18 +97,39 @@ class OrderPage extends StatelessWidget {
                 ],
               ),
               const Divider(),
+              SizedBox(
+                height: height / 8,
+              ),
 
               // Kahve içeriği gösterimi için GridView
-              Expanded(
-                child: ContainerCoffeeOrder(
-                  title: text ?? 'Ürün Adı',
-                  subTitle: 'Açıklama', // Alt başlık için örnek bir metin
-                  price: price ?? '0.00',
-                  image: imagePath ?? UIImage.notFound,
-                  function: () {}, // Buton işlevi
-                ),
+              ContainerCoffeeOrder(
+                title: widget.text ?? 'Ürün Adı',
+                subTitle: 'Açıklama', // Alt başlık için örnek bir metin
+                price: widget.price ?? '0.00',
+                image: widget.imagePath ?? UIImage.notFound,
+                function: () {}, // Buton işlevi
               ),
-              CustomButton(text: 'buton', function: () {})
+              Spacer(),
+              const Column(
+                children: [
+                  BasicText(text: 'Payment Summary'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BasicText(text: 'Price'),
+                      BasicText(
+                        text: 'price',
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              Spacer(),
+              CustomButton(
+                  backgroundColor: UIColor.loginButtonColor,
+                  height: height / 5,
+                  text: 'Order',
+                  function: () {})
             ],
           ),
         ),

@@ -23,8 +23,24 @@ class ContainerCoffeeOrder extends StatefulWidget {
 }
 
 class _ContainerCoffeeOrderState extends State<ContainerCoffeeOrder> {
+       int amount=0;
+
+   void addAmont(){
+    setState(() {
+      amount++;
+    });
+  }
+  void removeAmount(){
+setState(() {
+  amount--;
+  if(amount <0){
+    amount=0;
+  }
+});
+  }
   @override
   Widget build(BuildContext context) {
+ 
     double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.width * 0.15;
 
@@ -66,11 +82,15 @@ class _ContainerCoffeeOrderState extends State<ContainerCoffeeOrder> {
                 child: Row(
                  
                   children: [
-                    const Icon(Icons.remove),
+                    GestureDetector(
+                      onTap:() => removeAmount(),
+                      child: const Icon(Icons.remove)),
                     SizedBox(width: width / 2),
-                    BasicText(text: '1'),
+                    BasicText(text: '$amount'),
                     SizedBox(width: width / 2),
-                    const Icon(Icons.add),
+                    GestureDetector(
+                      onTap: () => addAmont(),
+                      child: const Icon(Icons.add)),
                   ],
                 ),
               ),
