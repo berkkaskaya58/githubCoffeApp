@@ -5,6 +5,7 @@ import 'package:coffee_shop_app/view/navigation_bar_detail_page/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:coffee_shop_app/widget/button_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +26,8 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-   late double price; // `price` değişkeni late olarak tanımlandı
+  late double price; // `price` değişkeni late olarak tanımlandı
+  bool isLiked = false;  // Heart iconu için başlangıçta beğenilmedi olarak ayarladık
 
   @override
   void initState() {
@@ -50,13 +52,13 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     double paddingWidth = MediaQuery.of(context).size.width * 0.05;
-    double paddingHeight = MediaQuery.of(context).size.width * 0.55;
+    double height = MediaQuery.of(context).size.width * 0.05;
     return Scaffold(
       backgroundColor: UIColor.white,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-              left: paddingWidth, right: paddingWidth, bottom: paddingHeight / 6),
+              left: paddingWidth, right: paddingWidth, bottom: height  ,top: height),
           child: Column(
             children: [
               Row(
@@ -73,12 +75,19 @@ class _DetailPageState extends State<DetailPage> {
                     text: 'Detay',
                     fontSize: 20,
                   ),
-                  const Icon(Icons.heart_broken_outlined),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                       isLiked=!isLiked;  // Heart iconunun durumunu değiştiriyoruz
+                      });
+                    },
+                    child: isLiked 
+                      ? const Icon(EvaIcons.heart, color: Colors.red) // Dolu kalp
+                      : const Icon(EvaIcons.heartOutline, color: Colors.grey), // Çizili kalp
+                  ),
                 ],
               ),
-              SizedBox(
-                height: paddingHeight / 10,
-              ),
+              SizedBox(height: height),
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(30)),
                 child: Image.asset(
@@ -88,9 +97,7 @@ class _DetailPageState extends State<DetailPage> {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(
-                height: paddingHeight / 15,
-              ),
+              SizedBox(height: height),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -112,13 +119,9 @@ class _DetailPageState extends State<DetailPage> {
               Row(
                 children: [
                   Image.asset(UIImage.star),
-                  const SizedBox(
-                    width: 5,
-                  ),
+                  const SizedBox(width: 5),
                   const BasicText(text: '4.8'),
-                  const SizedBox(
-                    width: 5,
-                  ),
+                  const SizedBox(width: 5),
                   const BasicText(
                     text: '(230)',
                     textColor: UIColor.grey,
@@ -127,14 +130,10 @@ class _DetailPageState extends State<DetailPage> {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    top: paddingHeight / 15,
-                    left: paddingWidth,
-                    right: paddingWidth),
+                    top: height , left: paddingWidth, right: paddingWidth),
                 child: const Divider(),
               ),
-              SizedBox(
-                height: paddingHeight / 20,
-              ),
+              SizedBox(height: height),
               const Row(
                 children: [
                   BasicText(
@@ -155,9 +154,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: paddingHeight / 5,
-              ),
+              const Spacer(),
               const Row(
                 children: [
                   BasicText(
@@ -167,9 +164,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: paddingHeight / 8,
-              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -191,7 +186,7 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                 ],
               ),
-              const Spacer(),
+              SizedBox(height: height),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -210,13 +205,11 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: paddingWidth,
-                  ),
+                  SizedBox(width: paddingWidth),
                   Expanded(
                     child: CustomButton(
-                      function: () => Get.to(() => CustomNavigationBar(price: price,imagePath: widget.imagePath,)),
-                      height: paddingHeight / 4,
+                      function: () => Get.to(() => CustomNavigationBar(price: price, imagePath: widget.imagePath)),
+                      height: height * 3,
                       width: paddingWidth * 12,
                       text: 'Buy Now',
                       fontWeight: FontWeight.bold,
