@@ -12,6 +12,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
      double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.width * 0.05;
+    
 
     return Scaffold(
       body: Container(
@@ -30,7 +31,7 @@ class LoginPage extends StatelessWidget {
             height: height*2.5,
             backgroundColor: UIColor.loginButtonColor,
             text: 'Giriş Yap',
-            function: () => Get.to(() =>  const CustomBottomNavigationBar()),
+            function: () => Get.to(() =>  const CustomBottomNavigationBar(price: 0.0,)),
           ),],),
         )
       ),

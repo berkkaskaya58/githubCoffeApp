@@ -5,7 +5,11 @@ import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigationBar extends StatefulWidget {
-  const CustomNavigationBar({super.key});
+  final double price;
+  final String imagePath;
+
+  // Constructor
+  CustomNavigationBar({super.key, required this.price, required this.imagePath});
 
   @override
   State<CustomNavigationBar> createState() => _CustomNavigationBarState();
@@ -13,24 +17,36 @@ class CustomNavigationBar extends StatefulWidget {
 
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   int currentIndex = 0;
+ 
 
-  final List<Widget> pages = [
-     OrderPage(),
-    const LoginPage(),
-  ];
+  // Sayfaların listesi
+  late List<Widget> pages;
+
+  @override
+  void initState() {
+    super.initState();
+   
+    // Sayfaları initState içinde oluşturuyoruz
+    pages = [
+      OrderPage(price: widget.price,imagePath: widget.imagePath,), // price'ı OrderPage'e iletiyoruz
+      const LoginPage(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.width * 0.55;
+
     return Scaffold(
       body: Stack(
         children: [
-          pages[currentIndex], // İçerik sayfası
+          // Sayfa içeriği
+          pages[currentIndex],
 
-          // Yukarıdaki gezinme çubuğu
+          // Gezinme çubuğu
           Positioned(
-            top: height/1.5,
+            bottom: height*2.8,
             left: width,
             right: width,
             child: Container(
@@ -42,48 +58,44 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  // Deliver butonu
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        currentIndex = 0;
+                        currentIndex = 0; // Deliver sayfasına geç
                       });
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                       
                         BasicText(
-                          text:'Deliver',
-                          
-                            textColor: currentIndex == 0
-                                ? UIColor.white
-                                : Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                          
+                          text: 'Deliver',
+                          textColor: currentIndex == 0
+                              ? UIColor.white
+                              : Colors.black,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ],
                     ),
                   ),
+                  // Pick Up butonu
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        currentIndex = 1;
+                        currentIndex = 1; // Pick Up sayfasına geç
                       });
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                       
-                         BasicText(
+                        BasicText(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          text:'Pick Up',
-                          
-                            textColor: currentIndex ==1
-                                ? UIColor.white
-                                : Colors.black,
-                          
+                          text: 'Pick Up',
+                          textColor: currentIndex == 1
+                              ? UIColor.white
+                              : Colors.black,
                         ),
                       ],
                     ),

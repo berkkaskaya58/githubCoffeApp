@@ -8,18 +8,44 @@ import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final String imagePath;
   final String text;
-  final double price;
+  final double price; // initialPrice yerine price kullanıldı
   final int index;
-  // final String description;
   const DetailPage(
       {super.key,
       required this.imagePath,
       required this.text,
-      required this.price,
+      required this.price, // price olarak değiştirildi
       required this.index});
+
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+   late double price; // `price` değişkeni late olarak tanımlandı
+
+  @override
+  void initState() {
+    super.initState();
+    price = widget.price; // `price` widget'tan alınarak başlatıldı
+  }
+
+  // Orta boyut fiyat fonksiyonu
+  void priceM() {
+    setState(() {
+      price = widget.price * 1.5; // Orta boyut için fiyatı günceller
+    });
+  }
+
+  // Büyük boyut fiyat fonksiyonu
+  void priceL() {
+    setState(() {
+      price = widget.price * 2; // Büyük boyut için fiyatı günceller
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +56,7 @@ class DetailPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(
-               left: paddingWidth, right: paddingWidth,bottom: paddingHeight/6),
+              left: paddingWidth, right: paddingWidth, bottom: paddingHeight / 6),
           child: Column(
             children: [
               Row(
@@ -54,13 +80,14 @@ class DetailPage extends StatelessWidget {
                 height: paddingHeight / 10,
               ),
               ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                  child: Image.asset(
-                    width: double.infinity,
-                    height: 202,
-                    imagePath,
-                    fit: BoxFit.cover,
-                  )),
+                borderRadius: const BorderRadius.all(Radius.circular(30)),
+                child: Image.asset(
+                  width: double.infinity,
+                  height: 202,
+                  widget.imagePath,
+                  fit: BoxFit.cover,
+                ),
+              ),
               SizedBox(
                 height: paddingHeight / 15,
               ),
@@ -68,7 +95,7 @@ class DetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BasicText(
-                    text: text,
+                    text: widget.text,
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
                   ),
@@ -79,7 +106,7 @@ class DetailPage extends StatelessWidget {
                   BasicText(
                     text: 'Ice/Hot',
                     textColor: UIColor.grey,
-                  )
+                  ),
                 ],
               ),
               Row(
@@ -95,7 +122,7 @@ class DetailPage extends StatelessWidget {
                   const BasicText(
                     text: '(230)',
                     textColor: UIColor.grey,
-                  )
+                  ),
                 ],
               ),
               Padding(
@@ -116,16 +143,16 @@ class DetailPage extends StatelessWidget {
                   ),
                 ],
               ),
-               Row(
+              Row(
                 children: [
                   Expanded(
                     child: BasicText(
-                        textColor: UIColor.grey,
-                        softWrap: true,
-                        overflow: TextOverflow.visible,
-                        text:
-                          UIDescription.description[index]),
-                  )
+                      textColor: UIColor.grey,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                      text: UIDescription.description[widget.index],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -146,24 +173,37 @@ class DetailPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                 ContainerText(text: 'S', function: (){},),
-                  ContainerText(text: 'M', function: (){},),
-                   ContainerText(text: 'L', function: (){},),
+                  ContainerText(
+                    text: 'S',
+                    function: () {
+                      setState(() {
+                        price = widget.price; // Küçük boyut için fiyatı sıfırla
+                      });
+                    },
+                  ),
+                  ContainerText(
+                    text: 'M',
+                    function: priceM, // Orta boyut için fonksiyonu çağır
+                  ),
+                  ContainerText(
+                    text: 'L',
+                    function: priceL, // Büyük boyut için fonksiyonu çağır
+                  ),
                 ],
               ),
-             const Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
                     children: [
                       const BasicText(
-                        text: 'Price',
+                        text: 'Price', // Eski fiyat burada gösterilir
                         fontSize: 20,
                         textColor: UIColor.grey,
                       ),
                       BasicText(
-                        text: '$price',
+                        text: price.toStringAsFixed(2), // Güncellenmiş fiyat burada gösterilir
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         textColor: UIColor.loginButtonColor,
@@ -174,9 +214,8 @@ class DetailPage extends StatelessWidget {
                     width: paddingWidth,
                   ),
                   Expanded(
-                    // Bu Expanded eklendi
                     child: CustomButton(
-                      function: ()=>Get.to(()=> CustomNavigationBar()),
+                      function: () => Get.to(() => CustomNavigationBar(price: price,imagePath: widget.imagePath,)),
                       height: paddingHeight / 4,
                       width: paddingWidth * 12,
                       text: 'Buy Now',

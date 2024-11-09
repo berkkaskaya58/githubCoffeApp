@@ -7,16 +7,17 @@ import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
 
 class OrderPage extends StatefulWidget {
-  final String? imagePath;
+  final String imagePath;
   final String? text;
-  final String? price;
+  final double price;
   final int? index;
+
 
   const OrderPage({
     super.key,
-    this.imagePath,
+    required this.imagePath,
     this.text,
-    this.price,
+    required this.price,
     this.index,
   });
 
@@ -25,6 +26,21 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
+  late double updatedPrice;
+
+  @override
+  void initState() {
+    super.initState();
+    updatedPrice = widget.price;  // Başlangıçta gelen fiyat
+  }
+
+  // Fiyat güncellenince çalışacak fonksiyon
+  void updatePrice(double newPrice) {
+    setState(() {
+      updatedPrice = newPrice;  // Fiyatı güncelle
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.05;
@@ -85,7 +101,6 @@ class _OrderPageState extends State<OrderPage> {
                     function: () {},
                     prefixIcon: const Icon(Icons.edit),
                   ),
-                 
                 ],
               ),
               const Divider(),
@@ -99,11 +114,15 @@ class _OrderPageState extends State<OrderPage> {
                       ContainerCoffeeOrder(
                         title: widget.text ?? 'Ürün Adı',
                         subTitle: 'Açıklama',
-                        price: widget.price ?? '0.00',
+                        price: widget.price,
                         image: widget.imagePath ?? UIImage.notFound,
-                        function: () {},
+                        function: () {
+                          setState(() {
+                            // Fiyat güncellenmeden önce yapılacak diğer işlemler
+                          });
+                        },
+                        onPriceUpdated: updatePrice,  // Fiyat güncelleme fonksiyonunu geçiyoruz
                       ),
-                     
                     ],
                   ),
                 ),
@@ -116,7 +135,7 @@ class _OrderPageState extends State<OrderPage> {
                     children: [
                       const BasicText(text: 'Price'),
                       BasicText(
-                        text: widget.price ?? '0.00',
+                        text: updatedPrice.toStringAsFixed(2), // Güncellenmiş fiyatı burada gösteriyoruz
                       ),
                     ],
                   ),

@@ -1,13 +1,12 @@
-import 'package:coffee_shop_app/ui/ui_image/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:flutter/material.dart';
-
 class ContainerCoffeeOrder extends StatefulWidget {
   final String title;
   final String subTitle;
-  final String price;
+  final double price;
   final String image;
   final Function function;
+  final Function(double) onPriceUpdated; // Fiyat güncellendiğinde çağrılacak fonksiyon
 
   const ContainerCoffeeOrder({
     super.key,
@@ -16,6 +15,7 @@ class ContainerCoffeeOrder extends StatefulWidget {
     required this.price,
     required this.image,
     required this.function,
+    required this.onPriceUpdated, // Yeni parametre
   });
 
   @override
@@ -23,24 +23,37 @@ class ContainerCoffeeOrder extends StatefulWidget {
 }
 
 class _ContainerCoffeeOrderState extends State<ContainerCoffeeOrder> {
-       int amount=0;
+  int amount = 1;
+  late double price;
 
-   void addAmont(){
+  @override
+  void initState() {
+    super.initState();
+    price = widget.price;
+  }
+
+  // Miktar arttırma fonksiyonu
+  void addAmount() {
     setState(() {
       amount++;
+      price = widget.price * amount;  // Yeni fiyat, miktar ile çarpılarak hesaplanıyor
     });
+    widget.onPriceUpdated(price);  // Fiyat güncellendikten sonra üst widget'a bildiriyoruz
   }
-  void removeAmount(){
-setState(() {
-  amount--;
-  if(amount <0){
-    amount=0;
+
+  // Miktar azaltma fonksiyonu
+  void removeAmount() {
+    setState(() {
+      if (amount > 1) {
+        amount--;
+        price = widget.price * amount;  // Yeni fiyat, miktar ile çarpılarak hesaplanıyor
+      }
+    });
+    widget.onPriceUpdated(price);  // Fiyat güncellendikten sonra üst widget'a bildiriyoruz
   }
-});
-  }
+
   @override
   Widget build(BuildContext context) {
- 
     double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.width * 0.15;
 
@@ -58,9 +71,9 @@ setState(() {
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.asset(
-                  UIImage.coffee2,
+                  widget.image,
                   width: width * 5,
-                  height: height, // Görsel yüksekliği
+                  height: height,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -75,21 +88,19 @@ setState(() {
                   ],
                 ),
               ),
-             
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
-                 
                   children: [
                     GestureDetector(
-                      onTap:() => removeAmount(),
-                      child: const Icon(Icons.remove)),
+                        onTap: removeAmount,
+                        child: const Icon(Icons.remove)),
                     SizedBox(width: width / 2),
                     BasicText(text: '$amount'),
                     SizedBox(width: width / 2),
                     GestureDetector(
-                      onTap: () => addAmont(),
-                      child: const Icon(Icons.add)),
+                        onTap: addAmount,
+                        child: const Icon(Icons.add)),
                   ],
                 ),
               ),
