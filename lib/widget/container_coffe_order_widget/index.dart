@@ -52,7 +52,6 @@ setState(() {
         },
         child: Container(
           width: double.infinity,
-          height: height,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

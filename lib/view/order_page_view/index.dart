@@ -108,8 +108,6 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                 ),
               ),
-
-              // Payment Summary ve Order Button alanları
               Column(
                 children: [
                   const BasicText(text: 'Payment Summary'),

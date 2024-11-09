@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildCoffeeTypeButton(String text, VoidCallback function) {
     return Padding(
-      padding: EdgeInsets.only(right: 10.0), // Spacing between buttons
+      padding: const EdgeInsets.only(right: 10.0), // Spacing between buttons
       child: ContainerText(
         text: text,
         // backgroundColor: UIColor.white,
@@ -153,28 +153,28 @@ class _HomePageState extends State<HomePage> {
     String coffeeTitle = items[index];
     String imagePath = '';
     String subTitle = 'Deep Form';
-    String price = '\$0.00';
+    double price = 0.00;
 
     switch (coffeeTitle) {
       case 'Caffe Mocha':
         imagePath = UIImage.coffee4;
-        price = '\$4.53';
+        price = 4.53;
         break;
       case 'Flat White':
         imagePath = UIImage.coffee3;
-        price = '\$3.53';
+        price = 3.53;
         break;
       case 'Americano':
         imagePath = UIImage.coffee2;
-        price = '\$4.53';
+        price = 4.53;
         break;
       case 'Caramel Macchiato':
         imagePath = UIImage.coffee1;
-        price = '\$4.53';
+        price = 4.53;
         break;
       case 'Latte':
         imagePath = UIImage.coffee3;
-        price = '\$8.53';
+        price = 8.53;
         break;
       default:
         break;

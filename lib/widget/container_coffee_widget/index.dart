@@ -1,13 +1,12 @@
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
-import 'package:coffee_shop_app/view/detail_page_view/index.dart';
 import 'package:coffee_shop_app/widget/basic_text_widget/index.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 
 class ContainerCoffee extends StatefulWidget {
   final String title;
   final String subTitle;
-  final String price;
+  final double price;
   final String image;
   final Function function;
 
@@ -25,6 +24,7 @@ class ContainerCoffee extends StatefulWidget {
 }
 
 class _ContainerCoffeeState extends State<ContainerCoffee> {
+  int amount=0;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width * 0.05;
@@ -59,15 +59,23 @@ class _ContainerCoffeeState extends State<ContainerCoffee> {
             ),
             Row(
               children: [
-                BasicText(text: widget.price),
+                BasicText(text: '${widget.price}'),
                 SizedBox(width: width * 4.5),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(9),
-                  child: Container(
-                    color: UIColor.loginButtonColor,
-                    child: const Icon(
-                      Icons.add,
-                      color: UIColor.white,
+                GestureDetector(
+                  onTap: () => setState(() {
+                    amount++;
+                    Get.snackbar('BAŞARILI','Ürün Sepete Eklendi',snackPosition: SnackPosition.TOP);
+
+                  }),
+
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(9),
+                    child: Container(
+                      color: UIColor.loginButtonColor,
+                      child: const Icon(
+                        Icons.add,
+                        color: UIColor.white,
+                      ),
                     ),
                   ),
                 ),

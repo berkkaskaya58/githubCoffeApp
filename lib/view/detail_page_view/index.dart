@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class DetailPage extends StatelessWidget {
   final String imagePath;
   final String text;
-  final String price;
+  final double price;
   final int index;
   // final String description;
   const DetailPage(
@@ -163,7 +163,7 @@ class DetailPage extends StatelessWidget {
                         textColor: UIColor.grey,
                       ),
                       BasicText(
-                        text: price,
+                        text: '$price',
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         textColor: UIColor.loginButtonColor,
