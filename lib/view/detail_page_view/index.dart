@@ -1,3 +1,4 @@
+import 'package:coffee_shop_app/controller/detail_page_controller/index.dart';
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/ui/ui_description/index.dart';
 import 'package:coffee_shop_app/ui/ui_image/index.dart';
@@ -27,28 +28,37 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  late double price; // `price` değişkeni late olarak tanımlandı
-  bool isLiked = false;  // Heart iconu için başlangıçta beğenilmedi olarak ayarladık
+  // late double price; // `price` değişkeni late olarak tanımlandı
+  // Heart iconu için başlangıçta beğenilmedi olarak ayarladık
+  late final DetailController controller;
 
   @override
-  void initState() {
+   void initState() {
     super.initState();
-    price = widget.price; // `price` widget'tan alınarak başlatıldı
+    controller = Get.put(DetailController()); // controller'ı burada başlatıyoruz
+    controller.price.value = widget.price; // Başlangıç fiyatını al
   }
+
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   price = widget.price; // `price` widget'tan alınarak başlatıldı
+  // }
 
   // Orta boyut fiyat fonksiyonu
-  void priceM() {
-    setState(() {
-      price = widget.price * 1.5; // Orta boyut için fiyatı günceller
-    });
-  }
+  // void priceM() {
+  //   setState(() {
+  //     price = widget.price * 1.5; // Orta boyut için fiyatı günceller
+  //   });
+  // }
 
-  // Büyük boyut fiyat fonksiyonu
-  void priceL() {
-    setState(() {
-      price = widget.price * 2; // Büyük boyut için fiyatı günceller
-    });
-  }
+  // // Büyük boyut fiyat fonksiyonu
+  // void priceL() {
+  //   setState(() {
+  //     price = widget.price * 2; // Büyük boyut için fiyatı günceller
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +86,17 @@ class _DetailPageState extends State<DetailPage> {
                     text: 'Detay',
                     fontSize: 20,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                       isLiked=!isLiked;  
-                      });
-                    },
-                    child: isLiked 
-                      ? const Icon(EvaIcons.heart, color: Colors.red) 
-                      : const Icon(EvaIcons.heartOutline, color: Colors.grey),
+                  Obx((){
+                     return GestureDetector(
+                      onTap: () {
+                       controller.changeIsliked();
+                      },
+                      child: controller.isLiked.value 
+                        ? const Icon(EvaIcons.heart, color: Colors.red) 
+                        : const Icon(EvaIcons.heartOutline, color: Colors.grey),
+                    );
+                  }
+                    
                   ),
                 ],
               ),
@@ -169,22 +181,20 @@ class _DetailPageState extends State<DetailPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ContainerText(
-                    text: 'S',
-                    function: () {
-                      setState(() {
-                        price = widget.price; // Küçük boyut için fiyatı sıfırla
-                      });
-                    },
-                  ),
-                  ContainerText(
-                    text: 'M',
-                    function: priceM, // Orta boyut için fonksiyonu çağır
-                  ),
-                  ContainerText(
-                    text: 'L',
-                    function: priceL, // Büyük boyut için fonksiyonu çağır
-                  ),
+                 ContainerText(
+                text: 'S',
+                function: () {
+                  controller.priceS(widget.price); // Küçük boyut fiyatını sıfırla
+                },
+              ),
+              ContainerText(
+                text: 'M',
+                function: (){controller.priceM(widget.price);} // Orta boyut için fonksiyonu çağır
+              ),
+              ContainerText(
+                text: 'L',
+                function: (){controller.priceL(widget.price);}, // Büyük boyut için fonksiyonu çağır
+              ),
                 ],
               ),
               SizedBox(height: height),
@@ -198,18 +208,20 @@ class _DetailPageState extends State<DetailPage> {
                         fontSize: 20,
                         textColor: UIColor.grey,
                       ),
-                      BasicText(
-                        text: price.toStringAsFixed(2), // Güncellenmiş fiyat burada gösterilir
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        textColor: UIColor.loginButtonColor,
-                      ),
+                      Obx(() {
+                        return BasicText(
+                          text: controller.price.value.toStringAsFixed(2), // Güncellenmiş fiyat burada gösterilir
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          textColor: UIColor.loginButtonColor,
+                        );
+                      }),
                     ],
                   ),
                   SizedBox(width: paddingWidth),
                   Expanded(
                     child: CustomButton(
-                      function: () => Get.to(() => CustomNavigationBar(price: price, imagePath: widget.imagePath)),
+                      function: () => Get.to(() => CustomNavigationBar(price: controller.price.value, imagePath: widget.imagePath)),
                       height: height * 3,
                       width: paddingWidth * 12,
                       text: 'Buy Now',
