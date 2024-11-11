@@ -86,18 +86,20 @@ class _DetailPageState extends State<DetailPage> {
                     text: 'Detay',
                     fontSize: 20,
                   ),
-                  Obx((){
-                     return GestureDetector(
-                      onTap: () {
-                       controller.changeIsliked();
-                      },
-                      child: controller.isLiked.value 
-                        ? const Icon(EvaIcons.heart, color: Colors.red) 
-                        : const Icon(EvaIcons.heartOutline, color: Colors.grey),
-                    );
-                  }
-                    
-                  ),
+                 Obx(() {
+  return GestureDetector(
+    onTap: () {
+      controller.changeIsliked();
+    },
+    child: AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: controller.isLiked.value
+          ? const Icon(EvaIcons.heart, color: Colors.red, key: ValueKey('liked'))
+          : const Icon(EvaIcons.heartOutline, color: Colors.grey, key: ValueKey('unliked')),
+    ),
+  );
+})
+
                 ],
               ),
               SizedBox(height: height),
