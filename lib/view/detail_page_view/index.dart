@@ -88,16 +88,29 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                  Obx(() {
   return GestureDetector(
-    onTap: () {
-      controller.changeIsliked();
-    },
-    child: AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      child: controller.isLiked.value
-          ? const Icon(EvaIcons.heart, color: Colors.red, key: ValueKey('liked'))
-          : const Icon(EvaIcons.heartOutline, color: Colors.grey, key: ValueKey('unliked')),
-    ),
-  );
+  onTap: () {
+    controller.changeIsliked();
+    if (controller.isLiked.value) {
+      controller.addToFavorites(
+        imagePath: widget.imagePath,
+        text: widget.text,
+        price: controller.price.value,
+        index: widget.index,
+      );
+     // Get.snackbar("Favorilere Eklendi", widget.text, snackPosition: SnackPosition.BOTTOM,);
+    } else {
+      controller.favorites.removeWhere((item) => item['text'] == widget.text);
+      //Get.snackbar("Favorilerden Çıkarıldı", widget.text, snackPosition: SnackPosition.BOTTOM,);
+    }
+  },
+  child: AnimatedSwitcher(
+    duration: const Duration(milliseconds: 300),
+    child: controller.isLiked.value
+        ? const Icon(EvaIcons.heart, color: Colors.red, key: ValueKey('liked'))
+        : const Icon(EvaIcons.heartOutline, color: Colors.grey, key: ValueKey('unliked')),
+  ),
+);
+
 })
 
                 ],

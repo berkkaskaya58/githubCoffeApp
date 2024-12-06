@@ -25,7 +25,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     // pages listesine OrderPage'i ve diğer sayfaları ekliyoruz
     pages.addAll([
       const HomePage(),
-      const FavoritePage(),
+       FavoritePage(),
       // OrderPage(price: widget.price), // price parametresi OrderPage'e iletiliyor
       const NotificationPage(),
     ]);
