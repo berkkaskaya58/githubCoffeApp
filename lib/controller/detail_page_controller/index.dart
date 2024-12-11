@@ -5,6 +5,7 @@ class DetailController extends GetxController {
   RxDouble price = 0.0.obs; 
   RxBool isLiked = false.obs;
   RxList<Map<String, dynamic>> favorites = <Map<String, dynamic>>[].obs;
+  
 
   // Fiyatı güncelleyen fonksiyonlar
   void priceS(double initialPrice) {

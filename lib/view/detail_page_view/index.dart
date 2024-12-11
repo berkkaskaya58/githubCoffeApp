@@ -236,7 +236,9 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(width: paddingWidth),
                   Expanded(
                     child: CustomButton(
-                      function: () => Get.to(() => CustomNavigationBar(price: controller.price.value, imagePath: widget.imagePath)),
+                      function: () => Get.to(() => CustomNavigationBar(price: controller.price.value, imagePath: widget.imagePath),  transition:
+                        Transition.rightToLeftWithFade,
+                    duration: const Duration(milliseconds: 200),),
                       height: height * 3,
                       width: paddingWidth * 12,
                       text: 'Buy Now',

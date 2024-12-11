@@ -12,29 +12,37 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     //  double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.width * 0.05;
-    
 
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(UIImage.loginCoffee),
-            fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(UIImage.loginCoffee),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child:Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(children: [const Spacer(), CustomButton(
-            width: double.infinity,
-            height: height*2.5,
-            backgroundColor: UIColor.loginButtonColor,
-            text: 'Giriş Yap',
-            function: () => Get.to(() =>  const CustomBottomNavigationBar(price: 0.0,)),
-          ),],),
-        )
-      ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                const Spacer(),
+                CustomButton(
+                  width: double.infinity,
+                  height: height * 2.5,
+                  backgroundColor: UIColor.loginButtonColor,
+                  text: 'Giriş Yap',
+                  function: () => Get.to(
+                    () => const CustomBottomNavigationBar(price: 0.0),
+                    transition:
+                        Transition.rightToLeftWithFade,
+                    duration: const Duration(milliseconds: 200),
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 }

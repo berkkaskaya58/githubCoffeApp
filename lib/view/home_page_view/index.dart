@@ -66,7 +66,8 @@ class _HomePageState extends State<HomePage> {
           ),
           // Search TextField
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.17, // Yüksekliği daha esnek hale getirin
+            top: MediaQuery.of(context).size.height *
+                0.17, // Yüksekliği daha esnek hale getirin
             left: width,
             right: width,
             child: TextField(
@@ -74,7 +75,8 @@ class _HomePageState extends State<HomePage> {
               onChanged: filterSearchResults,
               decoration: InputDecoration(
                 hintText: 'Ara',
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
               ),
             ),
           ),
@@ -90,7 +92,7 @@ class _HomePageState extends State<HomePage> {
           ),
           // Coffee Type Filter Buttons
           Positioned(
-            top: height*9.5, // Dinamik yükseklik
+            top: height * 9.5, // Dinamik yükseklik
             left: width,
             right: width,
             child: SingleChildScrollView(
@@ -98,9 +100,12 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                 children: [
                   _buildCoffeeTypeButton('All Coffee', showAllCoffees),
-                  _buildCoffeeTypeButton('Macchiato', () => _updateCoffeeList(['Caramel Macchiato'])),
-                  _buildCoffeeTypeButton('Latte', () => _updateCoffeeList(['Latte'])),
-                  _buildCoffeeTypeButton('Americano', () => _updateCoffeeList(['Americano'])),
+                  _buildCoffeeTypeButton('Macchiato',
+                      () => _updateCoffeeList(['Caramel Macchiato'])),
+                  _buildCoffeeTypeButton(
+                      'Latte', () => _updateCoffeeList(['Latte'])),
+                  _buildCoffeeTypeButton(
+                      'Americano', () => _updateCoffeeList(['Americano'])),
                 ],
               ),
             ),
@@ -111,21 +116,22 @@ class _HomePageState extends State<HomePage> {
             left: width,
             right: width,
             child: SizedBox(
-  height: 400,
-  child: GridView.builder(
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      mainAxisSpacing: 0,  // Daha küçük boşluk (yükseklik boşluğu)
-      crossAxisSpacing: width,  // Daha küçük boşluk (genişlik boşluğu)
-      mainAxisExtent: 360, // Öğelerin yüksekliğini biraz daha düşük tutuyoruz
-    ),
-    itemCount: items.length,
-    itemBuilder: (context, index) {
-      return _buildCoffeeItem(index);
-    },
-  ),
-),
-
+              height: 400,
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 0, // Daha küçük boşluk (yükseklik boşluğu)
+                  crossAxisSpacing:
+                      width, // Daha küçük boşluk (genişlik boşluğu)
+                  mainAxisExtent:
+                      360, // Öğelerin yüksekliğini biraz daha düşük tutuyoruz
+                ),
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return _buildCoffeeItem(index);
+                },
+              ),
+            ),
           ),
         ],
       ),
@@ -187,12 +193,16 @@ class _HomePageState extends State<HomePage> {
       price: price,
       image: imagePath,
       function: () {
-        Get.to(() => DetailPage(
-          imagePath: imagePath,
-          text: coffeeTitle,
-          price: price,
-          index: index,
-        ));
+        Get.to(
+          () => DetailPage(
+            imagePath: imagePath,
+            text: coffeeTitle,
+            price: price,
+            index: index,
+          ),
+          transition: Transition.rightToLeftWithFade,
+          duration: const Duration(milliseconds: 200),
+        );
       },
     );
   }
