@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "1050026223783",
     "project_id": "flutterfirebasecoffeeapp",
-    "storage_bucket": "flutterfirebasecoffeeapp.appspot.com"
+    "storage_bucket": "flutterfirebasecoffeeapp.firebasestorage.app"
   },
   "client": [
     {
@@ -12,7 +12,12 @@
           "package_name": "com.berk.coffee"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1050026223783-2fhis48n099pn9474s8a3cugq83ejt0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA8S9bJ3aakeXASDgh-XchoJTAsM7QUZ4g"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050026223783-2fhis48n099pn9474s8a3cugq83ejt0q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1050026223783-gmnt75p6ht72jtk1jpltl09khu33u4cq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.coffeeShopApp"
+              }
+            }
+          ]
         }
       }
     }

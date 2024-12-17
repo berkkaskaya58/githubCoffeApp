@@ -1,6 +1,8 @@
+import 'package:coffee_shop_app/controller/login_controller/index.dart';
 import 'package:coffee_shop_app/ui/ui_color/index.dart';
 import 'package:coffee_shop_app/ui/ui_image/index.dart';
 import 'package:coffee_shop_app/view/detail_page_view/index.dart';
+import 'package:coffee_shop_app/widget/button_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_coffee_widget/index.dart';
 import 'package:coffee_shop_app/widget/container_text_widget/index.dart';
 import 'package:flutter/material.dart';
@@ -51,12 +53,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+         final LoginController loginController = Get.put(LoginController());
+
     double width = MediaQuery.of(context).size.width * 0.05;
     double height = MediaQuery.of(context).size.height * 0.05;
 
     return Scaffold(
       body: Stack(
         children: [
+          
+      Positioned(
+  top: MediaQuery.of(context).padding.top, // Ekranın üst kısmına yerleştir
+  left: width,
+  right: width,
+  child: CustomButton(
+    text: "çık",
+    function: () {
+      loginController.signOut();
+    },
+    textColor: UIColor.loginButtonColor,
+  ),
+),
+
+
           // Background color setup
           Column(
             children: [

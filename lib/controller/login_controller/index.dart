@@ -10,7 +10,8 @@ class LoginController extends GetxController {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        // Kullanıcı giriş yapmadı, null döndür
+        // Kullanıcı giriş yapmayı iptal etti
+        print('Google giriş iptal edildi.');
         return null;
       }
 
@@ -22,16 +23,24 @@ class LoginController extends GetxController {
       );
 
       final UserCredential userCredential = await _auth.signInWithCredential(credential);
-      return userCredential.user; // Kullanıcı döndürülüyor
-    } catch (e) {
-   print('Google Giriş Hatası: $e'); // Hata detaylarını yazdırın
-   return null; // Hata durumunda null döndür
- }
 
+      // Giriş başarılı, kullanıcı döndürülüyor
+      print('Google ile giriş başarılı: ${userCredential.user?.email}');
+      return userCredential.user;
+    } catch (e) {
+      // Hata durumunu konsola yazdır
+      print('Google Giriş Hatası: $e');
+      return null;
+    }
   }
 
   Future<void> signOut() async {
-    await googleSignIn.signOut();
-    await _auth.signOut();
+    try {
+      await googleSignIn.signOut();
+      await _auth.signOut();
+      print('Kullanıcı başarıyla çıkış yaptı.');
+    } catch (e) {
+      print('Çıkış yaparken hata oluştu: $e');
+    }
   }
 }
